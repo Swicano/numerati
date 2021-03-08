@@ -2,7 +2,8 @@
 	path = numerapi
 	url = https://github.com/uuazed/numerapi.git
 	branch = master
-[submodule "examplescripts"]
+
+[submodule "example-scripts"]
 	path = example-scripts
 	url = https://github.com/numerai/example-scripts.git
 	branch = master
