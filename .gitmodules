@@ -1,0 +1,8 @@
+[submodule "numerapi"]
+	path = numerapi
+	url = https://github.com/uuazed/numerapi.git
+	branch = master
+[submodule "examplescripts"]
+	path = example-scripts
+	url = https://github.com/numerai/example-scripts.git
+	branch = master
