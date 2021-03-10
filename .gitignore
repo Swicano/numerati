@@ -1,5 +1,6 @@
 # local to repo
 Data/*
+numer_dev_env/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
