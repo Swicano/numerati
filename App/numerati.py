@@ -1,4 +1,5 @@
 import argparse
+from ..Model import example_model
 
 class Main:
     """
@@ -13,6 +14,16 @@ class Main:
         print('hi')
 
 
+
+
+
+class Predict:
+    pass
+
+class Visualize:
+    pass
+
+
 if __name__ == "__main__":
 
 
@@ -24,7 +35,18 @@ if __name__ == "__main__":
         help = "inject a file",
         default = None
     )
-
+    parser.add_argument(
+        "-m",
+        "--model",
+        help = "select the model to train",
+        default = None
+    )
+    parser.add_argument(
+        "-d",
+        "--data",
+        help = "select the data set on which to train the model",
+        default = None
+    )
     args = parser.parse_args()
 
     newMain = Main()
