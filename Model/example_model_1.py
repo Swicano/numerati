@@ -14,16 +14,16 @@ from xgboost import XGBRegressor
 TARGET_NAME = f"target"
 PREDICTION_NAME = f"prediction"
 
-MODEL_FILE = Path("example_model.xgb")
+MODEL_FILE = Path("example_model_1.xgb")
 
 
 class example_class:
     def main(self):
         print("Loading data...")
         # The training data is used to train your model how to predict the targets.
-        training_data = self.read_csv("numerai_training_data.csv")
+        training_data = self.read_csv("../SampleData/example_model_1/numerai_training_data.csv")
         # The tournament data is the data that Numerai uses to evaluate your model.
-        tournament_data = self.read_csv("numerai_tournament_data.csv")
+        tournament_data = self.read_csv("../SampleData/example_model_1/numerai_tournament_data.csv")
 
         feature_names = [
             f for f in training_data.columns if f.startswith("feature")
@@ -33,7 +33,7 @@ class example_class:
         # This is the model that generates the included example predictions file.
         # Taking too long? Set learning_rate=0.1 and n_estimators=200 to make this run faster.
         # Remember to delete example_model.xgb if you change any of the parameters below.
-        model = XGBRegressor(max_depth=5, learning_rate=0.01, n_estimators=2000, n_jobs=-1, colsample_bytree=0.1)
+        model = XGBRegressor(max_depth=5, learning_rate=0.1, n_estimators=200, n_jobs=-1, colsample_bytree=0.1)
         if MODEL_FILE.is_file():
             print("Loading pre-trained model...")
             model.load_model(MODEL_FILE)
