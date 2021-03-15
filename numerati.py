@@ -1,6 +1,15 @@
 #!/usr/bin/env python
 import argparse
-from Model.example_model_1  import example_class
+import csv
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+from xgboost import XGBRegressor
+
+MODEL_FILE = Path("Model/trained_models/xgboost1.xgb")
+TARGET_NAME = f"target"
+PREDICTION_NAME = f"prediction"
 
 class Main:
     """
@@ -10,10 +19,53 @@ class Main:
     def __init__(self):
         self.some_attribute = 'this is an attribute, be default, on the class Main'
 
-class TrainModel:
+class Model:
+    """
+    This needs to be made more abstract. the 'train' method should really
+    be imported/delegated to the xgboost module
+    """
     def __init__(self, modelName, trainingDataFileName):
         self.modelName = modelName
         self.trainingDataFileName = trainingDataFileName
+
+    def getData(self):
+        return self.read_csv("Data/example_model_1/numerai_training_data.csv")
+
+    def read_csv(self, file_path):
+        with open(file_path, 'r') as f:
+            column_names = next(csv.reader(f))
+
+        dtypes = {x: np.float16 for x in column_names if x.startswith(('feature', 'target'))}
+        df = pd.read_csv(file_path, dtype=dtypes, index_col=0)
+
+        # Memory constrained? Try this instead (slower, but more memory efficient)
+        # see https://forum.numer.ai/t/saving-memory-with-uint8-features/254
+        # dtypes = {f"target": np.float16}
+        # to_uint8 = lambda x: np.uint8(float(x) * 4)
+        # converters = {x: to_uint8 for x in column_names if x.startswith('feature')}
+        # df = pd.read_csv(file_path, dtype=dtypes, converters=converters)
+
+        return df
+
+    def train(self):
+        if modelName == "xgboost":
+             model = XGBRegressor(max_depth=5, learning_rate=0.1, n_estimators=200, n_jobs=-1, colsample_bytree=0.1)
+
+        trainingData  = self.getData()
+        feature_names = [
+            f for f in trainingData.columns if f.startswith("feature")
+        ]
+
+
+        if MODEL_FILE.is_file():
+            print("Loading pre-trained model...")
+            model.load_model(MODEL_FILE)
+        else:
+            print("Training model...")
+            model.fit(trainingData[feature_names], trainingData[TARGET_NAME])
+            model.save_model(MODEL_FILE)
+
+
 class Predict:
     pass
 
@@ -29,7 +81,7 @@ if __name__ == "__main__":
         "-m",
         "--modelName",
         help = "select the model to train",
-        default = None
+        default = 'xgboost'
     )
     parser.add_argument(
         "-t",
@@ -46,7 +98,9 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    trainingDataFileName = args.training_data
-    modelName = args.model
+    modelName = args.modelName
+    trainingDataFileName = args.trainingDataFileName
 
-    newModel = TrainModel(modelName, trainingDataFileName)
+    newModel = Model(modelName, trainingDataFileName)
+
+    newModel.train()
