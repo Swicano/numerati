@@ -94,5 +94,3 @@ if __name__ == "__main__":
 
     newModel = Model(modelName, trainingDataFileName)
     newModel.train()
-
-    if
