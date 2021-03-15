@@ -21,9 +21,9 @@ class example_class:
     def main(self):
         print("Loading data...")
         # The training data is used to train your model how to predict the targets.
-        training_data = self.read_csv("../SampleData/example_model_1/numerai_training_data.csv")
+        training_data = self.read_csv("../Data/example_model_1/numerai_training_data.csv")
         # The tournament data is the data that Numerai uses to evaluate your model.
-        tournament_data = self.read_csv("../SampleData/example_model_1/numerai_tournament_data.csv")
+        tournament_data = self.read_csv("../Data/example_model_1/numerai_tournament_data.csv")
 
         feature_names = [
             f for f in training_data.columns if f.startswith("feature")

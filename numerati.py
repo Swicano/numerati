@@ -1,5 +1,6 @@
+#!/usr/bin/env python
 import argparse
-from ..Model import example_model
+from Model.example_model_1  import example_class
 
 class Main:
     """
@@ -30,7 +31,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="the numereati converge")
 
     parser.add_argument(
-        "-f",
+        "-",
         "--file",
         help = "inject a file",
         default = None
@@ -42,12 +43,22 @@ if __name__ == "__main__":
         default = None
     )
     parser.add_argument(
-        "-d",
-        "--data",
+        "-t",
+        "--training_data",
         help = "select the data set on which to train the model",
         default = None
     )
+    parser.add_argument(
+        "-p",
+        "--predict_data",
+        help = "select the data set on which to usee the",
+        default = None
+    )
+
     args = parser.parse_args()
 
     newMain = Main()
     newMain.sayHi()
+    print('data:', args.data)
+    print('model:', args.model)
+    print()
