@@ -11,13 +11,6 @@ MODEL_FILE = Path("Model/trained_models/xgboost1.xgb")
 TARGET_NAME = f"target"
 PREDICTION_NAME = f"prediction"
 
-class Main:
-    """
-    idk what I'm doing I'm just stressed out + sunday scaries so I am writing this
-    first cli for numereati
-    """
-    def __init__(self):
-        self.some_attribute = 'this is an attribute, be default, on the class Main'
 
 class Model:
     """
@@ -49,13 +42,12 @@ class Model:
 
     def train(self):
         if modelName == "xgboost":
-             model = XGBRegressor(max_depth=5, learning_rate=0.1, n_estimators=200, n_jobs=-1, colsample_bytree=0.1)
+             model = XGBRegressor(max_depth=5, learning_rate=0.1, n_estimators=20, n_jobs=-1, colsample_bytree=0.1)
 
         trainingData  = self.getData()
         feature_names = [
             f for f in trainingData.columns if f.startswith("feature")
         ]
-
 
         if MODEL_FILE.is_file():
             print("Loading pre-trained model...")
@@ -76,7 +68,6 @@ class Visualize:
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="the numereati converge")
-
     parser.add_argument(
         "-m",
         "--modelName",
@@ -102,5 +93,6 @@ if __name__ == "__main__":
     trainingDataFileName = args.trainingDataFileName
 
     newModel = Model(modelName, trainingDataFileName)
-
     newModel.train()
+
+    if
