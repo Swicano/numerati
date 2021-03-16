@@ -157,7 +157,7 @@ def main():
     tournament_data[PREDICTION_NAME].to_csv("submission.csv", header=True)
 
 
-""" 
+"""
 functions used for advanced metrics
 """
 
