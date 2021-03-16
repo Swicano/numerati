@@ -95,10 +95,5 @@ if __name__ == "__main__":
     modelName = args.modelName
     trainingDataFileName = args.trainingDataFileName
 
-
-    # model = ModelSelector(args.modelName)
-
     newModel = Model(modelName, trainingDataFileName)
     newModel.train()
-
-    # model = ModelSelector(args.modelName)
