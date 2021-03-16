@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from Model.modelSelector import ModelSelector
+from Model.model_selector import ModelSelector
 
 
 MODEL_FILE = Path("Model/trained_models/xgboost1.xgb")
@@ -16,8 +16,7 @@ PREDICTION_NAME = f"prediction"
 
 class Model:
     """
-    This needs to be made more abstract. the 'train' method should really
-    be imported/delegated to the xgboost module
+    top level run the modeling
     """
     def __init__(self, modelName, trainingDataFileName):
         self.modelName = modelName
