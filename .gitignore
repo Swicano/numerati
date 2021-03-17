@@ -110,6 +110,7 @@ celerybeat.pid
 env/
 venv/
 ENV/
+/numerati_env
 env.bak/
 venv.bak/
 
@@ -130,3 +131,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# vscode workspace, local only
+*.code-workspace

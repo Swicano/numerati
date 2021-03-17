@@ -5,7 +5,8 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from xgboost import XGBRegressor
+
+from Model.model_selector import ModelSelector
 
 MODEL_FILE = Path("Model/trained_models/xgboost1.xgb")
 TARGET_NAME = f"target"
@@ -14,8 +15,9 @@ PREDICTION_NAME = f"prediction"
 
 class Model:
     """
-    This needs to be made more abstract. the 'train' method should really
-    be imported/delegated to the xgboost module
+
+    top level run the modeling
+
     """
     def __init__(self, modelName, trainingDataFileName):
         self.modelName = modelName
@@ -41,8 +43,10 @@ class Model:
         return df
 
     def train(self):
-        if modelName == "xgboost":
-             model = XGBRegressor(max_depth=5, learning_rate=0.1, n_estimators=20, n_jobs=-1, colsample_bytree=0.1)
+
+        model = ModelSelector(self.modelName)
+        selectedModel = model.select()
+
 
         trainingData  = self.getData()
         feature_names = [
@@ -51,11 +55,13 @@ class Model:
 
         if MODEL_FILE.is_file():
             print("Loading pre-trained model...")
-            model.load_model(MODEL_FILE)
+
+            selectedModel.load_model(MODEL_FILE)
         else:
             print("Training model...")
-            model.fit(trainingData[feature_names], trainingData[TARGET_NAME])
-            model.save_model(MODEL_FILE)
+            selectedModel.fit(trainingData[feature_names], trainingData[TARGET_NAME])
+            selectedModel.save_model(MODEL_FILE)
+            
 
 
 class Predict:
@@ -93,4 +99,6 @@ if __name__ == "__main__":
     trainingDataFileName = args.trainingDataFileName
 
     newModel = Model(modelName, trainingDataFileName)
+
     newModel.train()
+
