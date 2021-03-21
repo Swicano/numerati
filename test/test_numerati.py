@@ -2,12 +2,17 @@ import unittest
 from numerati import Main
 
 class testMain(unittest.TestCase):
-    def setUp(self):
-        self.placeHolder = Widget('widget')
 
 
-    def simpleTest(self):
-        self.assertEqual(1,1)
+
+    def testSimpleTest(self):
+
+        A = 5
+        B = 3
+        C = 2
+
+        D = B + C
+        self.assertEqual(A, D)
 
 if __name__ == '__main__':
-    testMain.main()
+    testMain.simpleTest()
