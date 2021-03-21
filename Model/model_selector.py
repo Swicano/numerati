@@ -1,4 +1,4 @@
-from xgboost import XGBRegressor
+from Model.scripts.xgboost1 import XGBoost
 
 class ModelSelector:
     def __init__(self, modelName):
@@ -6,7 +6,5 @@ class ModelSelector:
 
     def select(self):
         if self.modelName == 'xgboost':
-            return self.xgboost()
-
-    def xgboost(self):
-        return XGBRegressor(max_depth=5, learning_rate=0.1, n_estimators=20, n_jobs=-1, colsample_bytree=0.1)
+            XGBoost1  = XGBoost()
+            return XGBoost1.xgboost1()
