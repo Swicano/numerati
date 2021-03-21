@@ -1,7 +1,7 @@
-from numerati import Main
+from DataHandlers.data_reader import DataReader
 
 
-class TestMain:
+class TestDataReader:
     def testSimpleTest(self):
         """
         a placeholder test, demonstrating basic structurer
@@ -14,4 +14,4 @@ class TestMain:
 
 
 if __name__ == '__main__':
-    TestMain.simpleTest()
+    TestDataReader.simpleTest()
