@@ -7,3 +7,13 @@ The tool allow users to fluidly compare the results of multiple models without l
 Numerati provides an accessible platform with straight-forward feedback to accelerate the pace of machine-learningadoption
 
 This tool is in the early stages of development and changing rapidly
+
+## test usage:
+
+from top level of project:
+
+$python -m pytest
+
+## tool usage:
+
+$python numerati.py
