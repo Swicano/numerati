@@ -11,7 +11,7 @@ TARGET_NAME = f"target"
 PREDICTION_NAME = f"prediction"
 
 
-class Model:
+class Main:
     """
 
     top level run the modeling
@@ -79,8 +79,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     modelName = args.modelName
+
     trainingDataFileName = args.trainingDataFileName
 
-    newModel = Model(modelName, trainingDataFileName)
+    newRun = Main(modelName, trainingDataFileName)
 
-    newModel.train()
+    newRun.train()
