@@ -134,3 +134,5 @@ dmypy.json
 
 # vscode workspace, local only
 *.code-workspace
+/Config/*
+/numer_dev_env/

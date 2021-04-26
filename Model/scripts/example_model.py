@@ -54,9 +54,9 @@ def read_csv(file_path):
 def main():
     print("Loading data...")
     # The training data is used to train your model how to predict the targets.
-    training_data = read_csv("numerai_training_data.csv")
+    training_data = read_csv("..\\Data\\numerai_training_data.csv")
     # The tournament data is the data that Numerai uses to evaluate your model.
-    tournament_data = read_csv("numerai_tournament_data.csv")
+    tournament_data = read_csv("..\\Data\\numerai_tournament_data.csv")
 
     feature_names = [
         f for f in training_data.columns if f.startswith("feature")
@@ -118,7 +118,7 @@ def main():
     print(f"Feature Neutral Mean is {feature_neutral_mean}")
 
     # Load example preds to get MMC metrics
-    example_preds = pd.read_csv("example_predictions.csv").set_index("id")["prediction"]
+    example_preds = pd.read_csv("..\\Data\\example_predictions.csv").set_index("id")["prediction"]
     validation_example_preds = example_preds.loc[validation_data.index]
     validation_data["ExamplePreds"] = validation_example_preds
 
